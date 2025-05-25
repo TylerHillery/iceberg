@@ -1,0 +1,24 @@
+{
+    "format": "ICEBERG",
+    "metadata": {
+        "iceberg": {
+            "schema": {
+                "fields": [
+                    {
+                        "name": "id",
+                        "type": "int",
+                        "required": true
+                    },
+                    {
+                        "name": "name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "value",
+                        "type": "int"
+                    }
+                ]
+            }
+        }
+    }
+}
