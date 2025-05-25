@@ -1,3 +1,10 @@
+"""
+This script demonstrates how to query an AWS S3 Table using DuckDB with the Iceberg extension.
+
+Prerequisites:
+You must first run setup.py to create the S3 Table Bucket, namespace, and table
+with sample data. The setup script handles the initial configuration and data loading.
+"""
 import duckdb
 
 from config import AWS_PROFILE, S3_TABLE_BUCKET_ARN, ICEBERG_REST_ENDPOINT

@@ -4,12 +4,54 @@ Example walkthrough on how to interact with AWS S3 Table Bucket Iceberg REST Cat
 
 [AWS Docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-open-source.html)
 """
+
+import subprocess
 import pyarrow.parquet as pq
 from pyiceberg import catalog
 
-from config import logger, DATA_DIR, ICEBERG_CATALOG_CONFIG, log_config_info
+from config import (
+    logger,
+    DATA_DIR,
+    REGION,
+    BUCKET_NAME,
+    S3_TABLE_BUCKET_ARN,
+    ICEBERG_CATALOG_CONFIG,
+    log_config_info,
+)
 
 log_config_info()
+
+check_cmd = [
+    "aws",
+    "s3tables",
+    "get-table-bucket",
+    "--table-bucket-arn",
+    S3_TABLE_BUCKET_ARN,
+    "--region",
+    REGION,
+]
+check_result = subprocess.run(check_cmd, capture_output=True, text=True)
+
+# Only create the table bucket if it doesn't exist
+if check_result.returncode != 0 and "NotFoundException" in check_result.stderr:
+    logger.info(f"Table Bucket '{BUCKET_NAME}' does not exist. Creating now...")
+
+    create_cmd = [
+        "aws",
+        "s3tables",
+        "create-table-bucket",
+        "--region",
+        REGION,
+        "--name",
+        BUCKET_NAME,
+    ]
+    create_result = subprocess.run(create_cmd, capture_output=True, text=True)
+    if create_result.returncode == 0:
+        logger.info(f"Table Bucket '{BUCKET_NAME}' has been created successfully")
+    else:
+        logger.error(f"Error creating table bucket: {create_result.stderr}")
+else:
+    logger.info(f"Table Bucket '{BUCKET_NAME}' already exists.")
 
 # Connect to catalog
 try:

@@ -1,8 +1,13 @@
 ## Instructions
 
+**Resource**
 - [Tutorial: Getting started with S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-getting-started.html)
 
-The below instructions show how to use the AWS CLI to create S3 Table Bucket resources. The bucket itself has be create through  
+The below instructions show how to use the AWS CLI to create S3 Table Bucket resources. 
+
+If you prefer to use PyIceberg, follow the PyIceberg example in [setup.py](./setup.py).
+
+You can make this README interactive by opening it with [RUNME.dev](https://runme.dev/).
 
 ### Setup Configuration
 
@@ -64,10 +69,6 @@ aws s3tables create-table \
     --cli-input-json file://mytabledefinition.json
 ```
 
-# Query the table
-
-AWS provides multiple ways of interacting with the AWS S3 Table bucket, I have opted to use the [S3 Tables Iceberg REST Endpoint](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-open-source.html)
-
 # Teardown
 
 ### Delete Table
@@ -76,8 +77,8 @@ AWS provides multiple ways of interacting with the AWS S3 Table bucket, I have o
 aws s3tables delete-table \
     --table-bucket-arn $S3_TABLE_BUCKET_ARN \
     --namespace $NAMESPACE \
-    --name my_table
-echo "Table 'my_table' has been deleted successfully"
+    --name $TABLE_NAME 
+echo "Table '$TABLE_NAME' has been deleted successfully"
 ```
 
 ### Delete Namespace
