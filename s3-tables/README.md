@@ -3,7 +3,7 @@
 **Resource**
 - [Tutorial: Getting started with S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-getting-started.html)
 
-The below instructions show how to use the AWS CLI to create S3 Table Bucket resources. 
+The below instructions show how to use the AWS CLI to create S3 Table Bucket resources.
 
 If you prefer to use PyIceberg, follow the PyIceberg example in [setup.py](./setup.py).
 
@@ -36,7 +36,7 @@ echo "S3 table bucket ARN set to $S3_TABLE_BUCKET_ARN"
 ```sh
 aws s3tables create-table-bucket \
     --region $REGION \
-    --name $BUCKET_NAME 
+    --name $BUCKET_NAME
 ```
 
 ### Create Namespace
@@ -77,7 +77,7 @@ aws s3tables create-table \
 aws s3tables delete-table \
     --table-bucket-arn $S3_TABLE_BUCKET_ARN \
     --namespace $NAMESPACE \
-    --name $TABLE_NAME 
+    --name $TABLE_NAME
 echo "Table '$TABLE_NAME' has been deleted successfully"
 ```
 
@@ -86,7 +86,7 @@ echo "Table '$TABLE_NAME' has been deleted successfully"
 ```sh
 aws s3tables delete-namespace \
     --table-bucket-arn $S3_TABLE_BUCKET_ARN \
-    --namespace $NAMESPACE 
+    --namespace $NAMESPACE
 
 echo "Namespace '$NAMESPACE' has been deleted successfully"
 ```

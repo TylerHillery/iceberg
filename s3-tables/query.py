@@ -5,9 +5,9 @@ Prerequisites:
 You must first run setup.py to create the S3 Table Bucket, namespace, and table
 with sample data. The setup script handles the initial configuration and data loading.
 """
-import duckdb
 
-from config import AWS_PROFILE, S3_TABLE_BUCKET_ARN, ICEBERG_REST_ENDPOINT
+import duckdb
+from config import AWS_PROFILE, ICEBERG_REST_ENDPOINT, S3_TABLE_BUCKET_ARN
 
 # Install extensions
 install_extensions_sql = """
@@ -42,10 +42,10 @@ duckdb.query(attach_sql)
 duckdb.query("SHOW ALL TABLES")
 
 duckdb.query("""
-    select 
-        * 
-    from 
-        s3_tables_catalog.default.taxi_dataset 
-    limit 
+    select
+        *
+    from
+        s3_tables_catalog.default.taxi_dataset
+    limit
         2
 """)

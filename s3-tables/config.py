@@ -2,9 +2,10 @@
 Configuration for AWS S3 Table Bucket Iceberg REST Catalog
 """
 
-import os
 import logging
+import os
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 # Configure logging

@@ -13,3 +13,8 @@ dependencies = [
     "pyiceberg>=0.9.1",
     "python-dotenv>=1.1.0",
 ]
+
+[dependency-groups]
+dev = [
+    "pre-commit-uv>=4.1.4",
+]

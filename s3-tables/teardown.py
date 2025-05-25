@@ -1,15 +1,14 @@
 import subprocess
 
-from pyiceberg import catalog
-
 from config import (
-    logger,
-    REGION,
     BUCKET_NAME,
-    S3_TABLE_BUCKET_ARN,
     ICEBERG_CATALOG_CONFIG,
+    REGION,
+    S3_TABLE_BUCKET_ARN,
     log_config_info,
+    logger,
 )
+from pyiceberg import catalog
 
 log_config_info()
 

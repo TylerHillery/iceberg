@@ -6,18 +6,18 @@ Example walkthrough on how to interact with AWS S3 Table Bucket Iceberg REST Cat
 """
 
 import subprocess
-import pyarrow.parquet as pq
-from pyiceberg import catalog
 
+import pyarrow.parquet as pq
 from config import (
-    logger,
-    DATA_DIR,
-    REGION,
     BUCKET_NAME,
-    S3_TABLE_BUCKET_ARN,
+    DATA_DIR,
     ICEBERG_CATALOG_CONFIG,
+    REGION,
+    S3_TABLE_BUCKET_ARN,
     log_config_info,
+    logger,
 )
+from pyiceberg import catalog
 
 log_config_info()
 

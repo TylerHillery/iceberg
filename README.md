@@ -4,7 +4,7 @@ Iceberg playground repo
 
 ## Setup
 
-Each directory holds a self contained example of interacting with Iceberg in various. I have use [RUNME](https://runme.dev/) notebooks to turn each project's README.md file interactive. 
+Each directory holds a self contained example of interacting with Iceberg in various. I have use [RUNME](https://runme.dev/) notebooks to turn each project's README.md file interactive.
 
 The python examples use [uv](https://docs.astral.sh/uv/) for package and environment management.
 
