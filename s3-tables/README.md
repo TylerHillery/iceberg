@@ -2,7 +2,7 @@
 
 - [Tutorial: Getting started with S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-getting-started.html)
 
-The below instructions show how to use the AWS CLI to create S3 Table Bucket resources. Ot
+The below instructions show how to use the AWS CLI to create S3 Table Bucket resources. The bucket itself has be create through  
 
 ### Setup Configuration
 
@@ -35,6 +35,7 @@ aws s3tables create-table-bucket \
 ```
 
 ### Create Namespace
+
 Think of a namespace as similar to a "schema" in Postgres.
 
 ```sh
