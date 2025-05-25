@@ -54,12 +54,8 @@ else:
     logger.info(f"Table Bucket '{BUCKET_NAME}' already exists.")
 
 # Connect to catalog
-try:
-    iceberg_catalog = catalog.load_catalog("s3_table_catalog", **ICEBERG_CATALOG_CONFIG)
-    logger.info("Successfully loaded Iceberg catalog.")
-except Exception as e:
-    logger.error(f"Failed to load Iceberg catalog: {e}")
-    raise
+iceberg_catalog = catalog.load_catalog("s3_table_catalog", **ICEBERG_CATALOG_CONFIG)
+logger.info("Successfully loaded Iceberg catalog.")
 
 # Create Namespace
 # Think of a namespace as similar to a "schema" in Postgres.

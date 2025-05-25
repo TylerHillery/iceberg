@@ -17,7 +17,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Path configuration
-DATA_DIR = Path(__file__).parent.parent / "data"
+DATA_DIR = Path(__file__).parent.parent.parent / "data"
 
 # Load environment variables
 load_dotenv()
@@ -25,8 +25,8 @@ load_dotenv()
 # AWS Configuration
 AWS_ACCOUNT_ID = os.getenv("AWS_ACCOUNT_ID")
 AWS_PROFILE = os.getenv("AWS_PROFILE")
-REGION = os.getenv("REGION")
-BUCKET_NAME = os.getenv("BUCKET_NAME")
+REGION = os.getenv("AWS_REGION")
+BUCKET_NAME = os.getenv("S3_TABLE_BUCKET_NAME")
 
 # Iceberg S3 Table configuration
 S3_TABLE_BUCKET_ARN = f"arn:aws:s3tables:{REGION}:{AWS_ACCOUNT_ID}:bucket/{BUCKET_NAME}"
@@ -51,3 +51,5 @@ def log_config_info():
     logger.info(f"Bucket Name: {BUCKET_NAME}")
     logger.info(f"S3 Table Bucket ARN: {S3_TABLE_BUCKET_ARN}")
     logger.info(f"Iceberg REST Endpoint: {ICEBERG_REST_ENDPOINT}")
+    logger.info(f"S3 Table Namespace: {os.getenv('S3_TABLE_NAMESPACE', 'default')}")
+    logger.info(f"S3 Table Name: {os.getenv('S3_TABLE_NAME')}")

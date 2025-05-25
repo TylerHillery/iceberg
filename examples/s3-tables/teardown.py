@@ -10,27 +10,15 @@ from config import (
 )
 from pyiceberg import catalog
 
+from examples.utils.ice import purge_catalog
+
 log_config_info()
 
-try:
-    iceberg_catalog = catalog.load_catalog("s3_table_catalog", **ICEBERG_CATALOG_CONFIG)
-    logger.info("Successfully loaded Iceberg catalog.")
-except Exception as e:
-    logger.error(f"Failed to load Iceberg catalog: {e}")
-    raise
+iceberg_catalog = catalog.load_catalog("s3_table_catalog", **ICEBERG_CATALOG_CONFIG)
+logger.info("Successfully loaded Iceberg catalog.")
 
-found_namespace = False
-for (namespace,) in iceberg_catalog.list_namespaces():
-    found_namespace = True
-    for namespace, table in iceberg_catalog.list_tables(namespace):
-        iceberg_catalog.purge_table(f"{namespace}.{table}")
-        logger.info(f"Dropped table: {namespace}.{table}")
-    iceberg_catalog.drop_namespace(namespace)
-    logger.info(f"Dropped namespace: {namespace}")
-if not found_namespace:
-    logger.info("Nothing to delete: no namespaces found.")
+purge_catalog(iceberg_catalog)
 
-# Check if the table bucket exists before attempting to delete it
 check_cmd = [
     "aws",
     "s3tables",
@@ -42,7 +30,6 @@ check_cmd = [
 ]
 check_result = subprocess.run(check_cmd, capture_output=True, text=True)
 
-# Only delete the table bucket if it exists
 if check_result.returncode == 0:
     logger.info(f"Table Bucket '{BUCKET_NAME}' exists. Deleting now...")
 

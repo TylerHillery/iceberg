@@ -1,5 +1,5 @@
 [project]
-name = "iceberg"
+name = "examples"
 version = "0.1.0"
 description = "Playground repo for iceberg"
 readme = "README.md"
@@ -17,4 +17,9 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pre-commit-uv>=4.1.4",
+    "pyarrow-stubs>=19.4",
 ]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

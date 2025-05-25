@@ -15,7 +15,7 @@ INSTALL iceberg;
 LOAD iceberg;
 """
 
-duckdb.sql(install_extensions_sql)
+duckdb.query(install_extensions_sql)
 
 # Create Secrets
 create_secrets_sql = f"""
