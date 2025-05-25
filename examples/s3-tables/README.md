@@ -1,6 +1,7 @@
 ## Instructions
 
 **Resource**
+
 - [Tutorial: Getting started with S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-getting-started.html)
 
 The below instructions show how to use the AWS CLI to create S3 Table Bucket resources.
@@ -15,19 +16,19 @@ You can make this README interactive by opening it with [RUNME.dev](https://runm
 export AWS_ACCOUNT_ID=[Enter your aws account id]
 echo "AWS account id set to $AWS_ACCOUNT_ID"
 
-export REGION=[Enter your region]
-echo "Region set to $REGION"
+export AWS_REGION=[Enter your region]
+echo "Region set to $AWS_REGION"
 
-export BUCKET_NAME=[Enter your bucket name]
-echo "Bucket name set to $BUCKET_NAME"
+export S3_TABLE_BUCKET_NAME=[Enter your bucket name]
+echo "Bucket name set to $S3_TABLE_BUCKET_NAME"
 
-export NAMESPACE=[Enter your namespace]
-echo "Namespace set to $NAMESPACE"
+export S3_TABLE_NAMESPACE=[Enter your namespace]
+echo "Namespace set to $S3_TABLE_NAMESPACE"
 
-export TABLE_NAME=[Enter your table_name]
-echo "Table name set to $TABLE_NAME"
+export S3_TABLE_NAME=[Enter your table_name]
+echo "Table name set to $S3_TABLE_NAME"
 
-export S3_TABLE_BUCKET_ARN=arn:aws:s3tables:$REGION:$AWS_ACCOUNT_ID:bucket/$BUCKET_NAME
+export S3_TABLE_BUCKET_ARN=arn:aws:s3tables:$AWS_REGION:$AWS_ACCOUNT_ID:bucket/$S3_TABLE_BUCKET_NAME
 echo "S3 table bucket ARN set to $S3_TABLE_BUCKET_ARN"
 ```
 
@@ -35,8 +36,8 @@ echo "S3 table bucket ARN set to $S3_TABLE_BUCKET_ARN"
 
 ```sh
 aws s3tables create-table-bucket \
-    --region $REGION \
-    --name $BUCKET_NAME
+    --region $AWS_REGION \
+    --name $S3_TABLE_BUCKET_NAME
 ```
 
 ### Create Namespace
@@ -44,17 +45,16 @@ aws s3tables create-table-bucket \
 Think of a namespace as similar to a "schema" in Postgres.
 
 ```sh
-
 aws s3tables create-namespace \
-    --region $REGION \
+    --region $AWS_REGION \
     --table-bucket-arn $S3_TABLE_BUCKET_ARN \
-    --namespace "$NAMESPACE"
+    --namespace "$S3_TABLE_NAMESPACE"
 
 ```
 
 ```sh
 aws s3tables list-namespaces \
-    --region $REGION \
+    --region $AWS_REGION \
     --table-bucket-arn $S3_TABLE_BUCKET_ARN
 ```
 
@@ -62,10 +62,10 @@ aws s3tables list-namespaces \
 
 ```sh
 aws s3tables create-table \
-    --region $REGION \
+    --region $AWS_REGION \
     --table-bucket-arn $S3_TABLE_BUCKET_ARN \
-    --namespace $NAMESPACE \
-    --name $TABLE_NAME \
+    --namespace $S3_TABLE_NAMESPACE \
+    --name $S3_TABLE_NAME \
     --cli-input-json file://mytabledefinition.json
 ```
 
@@ -76,9 +76,9 @@ aws s3tables create-table \
 ```sh
 aws s3tables delete-table \
     --table-bucket-arn $S3_TABLE_BUCKET_ARN \
-    --namespace $NAMESPACE \
-    --name $TABLE_NAME
-echo "Table '$TABLE_NAME' has been deleted successfully"
+    --namespace $S3_TABLE_NAMESPACE \
+    --name $S3_TABLE_NAME
+echo "Table '$S3_TABLE_NAME' has been deleted successfully"
 ```
 
 ### Delete Namespace
@@ -86,16 +86,16 @@ echo "Table '$TABLE_NAME' has been deleted successfully"
 ```sh
 aws s3tables delete-namespace \
     --table-bucket-arn $S3_TABLE_BUCKET_ARN \
-    --namespace $NAMESPACE
+    --namespace $S3_TABLE_NAMESPACE
 
-echo "Namespace '$NAMESPACE' has been deleted successfully"
+echo "Namespace '$S3_TABLE_NAMESPACE' has been deleted successfully"
 ```
 
 ### Delete Table Bucket
 
 ```sh
 aws s3tables delete-table-bucket \
-    --region $REGION \
+    --region $AWS_REGION \
     --table-bucket-arn $S3_TABLE_BUCKET_ARN
 
 echo "Table Bucket '$S3_TABLE_BUCKET_ARN' has been deleted successfully"
